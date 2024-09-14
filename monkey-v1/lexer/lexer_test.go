@@ -2,11 +2,10 @@ package lexer
 
 import (
 	"Learning-Go/monkey-v1/token"
-	"log"
 	"testing"
 )
 
-func TestNextToken(*testing.T) {
+func TestNextToken(t *testing.T) {
 	var input string = `=+(){},;`
 
 	tests := []struct {
@@ -30,11 +29,11 @@ func TestNextToken(*testing.T) {
 		token := stringUnderTest.NextToken()
 
 		if token.Type != testToken.expectedType {
-			log.Fatalf("testing value [%d] - tokentype wrong. expected=%q, got=%q", i+1, testToken.expectedType, token.Type)
+			t.Fatalf("testing value [%d] - tokentype wrong. expected=%q, got=%q", i+1, testToken.expectedType, token.Type)
 		}
 
 		if token.Literal != testToken.expectedLit {
-			log.Fatalf("testing value [%d] - literal wrong. expected=%q, got=%q", i+1, testToken.expectedLit, token.Literal)
+			t.Fatalf("testing value [%d] - literal wrong. expected=%q, got=%q", i+1, testToken.expectedLit, token.Literal)
 		}
 	}
 }
