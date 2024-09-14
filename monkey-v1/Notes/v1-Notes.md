@@ -38,3 +38,5 @@
   }
 ```
 - Test methods but always start with a capital letter T and follow the format `func TestXxx(t *testing.T) {...}`. This must be done in a file called `something_test.go` where the method under test is `something.go`. Both must be in the same package.
+- Imports from other files must always start from the actual directory of the `go.mod`. For example, `import "Learning-Go/monkey-v1/token"` is the correct way,  
+not `import "monkey=v1/token"` unless the *monkey-v1* directory has a `go.mod`. 
