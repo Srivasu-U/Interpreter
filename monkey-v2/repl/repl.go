@@ -1,8 +1,8 @@
 package repl
 
 import (
-	"Learning-Go/monkey-v1/lexer"
-	"Learning-Go/monkey-v1/token"
+	"Learning-Go/monkey-v2/lexer"
+	"Learning-Go/monkey-v2/token"
 	"bufio"
 	"fmt"
 	"io"
