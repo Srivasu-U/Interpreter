@@ -36,8 +36,8 @@ out and have no meaning in our programming language. Or how things such as `{}` 
 ```
 - Our Monkey-v1 basically takes the tokens from the lexer as input to create an AST. 
 - It also analyzes the input to assert the expected structure. Which is why parsing is also called syntactic analysis.
-- As described below, while parser generators can be used to solve problems, and just plugged into this project, the goal is to understand how parsers work
-which is why we are writing our own.
+- As described below, while parser generators can be used to solve problems, and just plugged into this project, the goal is to understand how parsers work which is why we are writing our own.
+- In the Monkey language, everything other than let and return statements is an expressions. Essentially, expressions evaluated into some result while statements do not. So expression parsing such as operator precendence, function calls, is part of the challenge of writing a parser.
 
 
 ### Parser generators
@@ -52,7 +52,11 @@ that can be thrown in the field.
 ### Parsing strategies
 - Can either be top-down or bottom-up
 - Top down starts with the root node and recursively builds the tree downwards. Bottom-up does the opposite
-- Top-down parser examples: recursive decent parsing (this is used in Monkey-v2), early parsing, predictive parsing
+- Top-down parser examples: recursive decent parsing, early parsing, predictive parsing
+    - Recursive decent, also called Pratt parsing, this is used in Monkey-v2. Recursive decent is basically about looking at the next
+    bit of code and figuring out what to do.
+    - This works well with keywords such as `let`, `if` and so on. Trickier with expressions
+    - Pratt parsing solves this issue but mixing it with recursive descent - Read more [here (written in Java)](https://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/)
 - **Check: Parser error recovery**
 - **Check: What is formal proof of correctness for parsers?**
 - The idea is to get a minimal parser that works with Monkey, is extendible and a good starting point.
