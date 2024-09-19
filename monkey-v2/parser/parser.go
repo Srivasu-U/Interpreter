@@ -7,6 +7,25 @@ import (
 	"fmt"
 )
 
+type (
+	prefixParseFn func() ast.Expression
+	infixParseFn  func(ast.Expression) ast.Expression
+	// the param is the "left operand". prefixParseFn doesn't have a left operand so it uses no param
+)
+
+const (
+	_ int = iota
+	// Gives incrementing numbers as values to the constants. The ordering matter.
+	// It is in the increasing order of precedence, ie, highest precedence at the bottom
+	LOWEST
+	EQUALS      // ==
+	LESSGREATER // > OR <
+	SUM         // +
+	PRODUCT     // *
+	PREFIX      // -X or !X
+	CALL        // function call
+)
+
 /*
 The Parser essentially takes in the lexer as an input and repeatedly
 calls l.NextToken() to read through the tokens. We keep track of both
@@ -19,6 +38,9 @@ type Parser struct {
 	curToken  token.Token
 	peekToken token.Token
 	errors    []string
+
+	prefixParseFns map[token.TokenType]prefixParseFn
+	infixParseFns  map[token.TokenType]infixParseFn
 }
 
 func New(l *lexer.Lexer) *Parser {
@@ -58,7 +80,7 @@ func (p *Parser) parseStatement() ast.Statement {
 	case token.RETURN:
 		return p.parseReturnStatement()
 	default:
-		return nil
+		return p.parseExpressionStatement()
 	}
 }
 
@@ -80,6 +102,14 @@ func (p *Parser) expectPeek(tokType token.TokenType) bool {
 		p.peekError(tokType)
 		return false
 	}
+}
+
+func (p *Parser) registerPrefix(tokenType token.TokenType, fn prefixParseFn) {
+	p.prefixParseFns[tokenType] = fn
+}
+
+func (p *Parser) registerInfix(tokenType token.TokenType, fn infixParseFn) {
+	p.infixParseFns[tokenType] = fn
 }
 
 func (p *Parser) parseLetStatement() *ast.LetStatement {
@@ -114,6 +144,28 @@ func (p *Parser) parseReturnStatement() *ast.ReturnStatement {
 	}
 
 	return stmt
+}
+
+func (p *Parser) parseExpressionStatement() *ast.ExpressionStatement {
+	stmt := &ast.ExpressionStatement{Token: p.curToken}
+
+	stmt.Expression = p.parseExpression(LOWEST)
+
+	if p.peekTokenIs(token.SEMICOLON) {
+		p.nextToken()
+	}
+
+	return stmt
+}
+
+func (p *Parser) parseExpression(precedence int) ast.Expression {
+	prefix := p.prefixParseFns[p.curToken.Type]
+	if prefix == nil {
+		return nil
+	}
+	leftExp := prefix()
+
+	return leftExp
 }
 
 func (p *Parser) ParseProgram() *ast.Program {
