@@ -57,6 +57,9 @@ that can be thrown in the field.
     bit of code and figuring out what to do.
     - This works well with keywords such as `let`, `if` and so on. Trickier with expressions
     - Pratt parsing solves this issue but mixing it with recursive descent - Read more [here (written in Java)](https://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/)
+    - Pratt parsing essentially associated a parsing function with a token type. If that token type is encountered, then the parsing function is
+    executed and returns an AST node to represent it.
+        - Each token type can have two parsing functions: for prefix or infix positions
 - **Check: Parser error recovery**
 - **Check: What is formal proof of correctness for parsers?**
 - The idea is to get a minimal parser that works with Monkey, is extendible and a good starting point.
@@ -174,3 +177,5 @@ func A(x, y int) (string, string) {...}
 - Consts do not use datatypes or the short hand operator `:=`
 - Type convertion works like this: `datatype(value)`. Example: `float64(2)` converts int 2 into float64
 - We also have type checking/assertion like this: `ident.(type)`. Example: `value.(string)` checks if value contains a string expression
+- Interesting error message: `impossible type assertion: program.Statements[0].(*ast.Statement)
+	*ast.Statement does not implement ast.Statement (type *ast.Statement is pointer to interface, not interface)`. What does this mean?
