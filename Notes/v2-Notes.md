@@ -158,5 +158,13 @@ type Y interface {
     X       // Here, Y implements methodX() from X as well. Y **must** provide its own implementation of methodX()
     methodY() return_type
 }
+```
 - Interfaces can somehow be struct elements?, ie, structs implement interfaces. I am not sure how
 - Interfaces can be parameters to functions
+- In Golang, only methods or values starting with a capital letter can be exported. For example, in the `lexer.go` file
+`New()` and `NewToken()` are exportable methods while `isDigit()` and others are not.
+- Functions can also have multiple return values
+```
+func A(x, y int) (string, string) {...}
+```
+- Consts do not use datatypes or the short hand operator `:=`
