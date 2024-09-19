@@ -168,3 +168,5 @@ type Y interface {
 func A(x, y int) (string, string) {...}
 ```
 - Consts do not use datatypes or the short hand operator `:=`
+- Type convertion works like this: `datatype(value)`. Example: `float64(2)` converts int 2 into float64
+- We also have type checking/assertion like this: `ident.(type)`. Example: `value.(string)` checks if value contains a string expression
