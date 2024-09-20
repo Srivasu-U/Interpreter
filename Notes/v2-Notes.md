@@ -64,6 +64,7 @@ that can be thrown in the field.
 - **Check: What is formal proof of correctness for parsers?**
 - The idea is to get a minimal parser that works with Monkey, is extendible and a good starting point.
 - What does a parser that work correctly mean? Accurate production of an AST that conveys the right information. This is where design comes in. Refer this [link](https://stackoverflow.com/questions/16066454/parsing-which-method-choose) and the first answer to find how design can impact the parser used.
+- All of our parsing functions are going to follow this protocol: start with current token being the type of token you’re associated with and return with current token being the last token that’s part of your expression type. Never advance the tokens too far.
 
 ## AST used in this project
 - The initial structure of the AST as put forth in [ast.go](/ast/ast.go) is as follows
