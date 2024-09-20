@@ -53,13 +53,6 @@ that can be thrown in the field.
 - Can either be top-down or bottom-up
 - Top down starts with the root node and recursively builds the tree downwards. Bottom-up does the opposite
 - Top-down parser examples: recursive decent parsing, early parsing, predictive parsing
-    - Recursive decent, also called Pratt parsing, this is used in Monkey-v2. Recursive decent is basically about looking at the next
-    bit of code and figuring out what to do.
-    - This works well with keywords such as `let`, `if` and so on. Trickier with expressions
-    - Pratt parsing solves this issue but mixing it with recursive descent - Read more [here (written in Java)](https://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/)
-    - Pratt parsing essentially associated a parsing function with a token type. If that token type is encountered, then the parsing function is
-    executed and returns an AST node to represent it.
-        - Each token type can have two parsing functions: for prefix or infix positions
 - **Check: Parser error recovery**
 - **Check: What is formal proof of correctness for parsers?**
 - The idea is to get a minimal parser that works with Monkey, is extendible and a good starting point.
@@ -150,6 +143,22 @@ function parseOperatorExpression() {
 // [...]
 ```
 
+### Notes on the Pratt Parser
+- Recursive decent, this is used in Monkey-v2. Recursive decent is basically about looking at the next bit of code and figuring out what to do.
+    - This works well with keywords such as `let`, `if` and so on. Trickier with expressions
+    - Pratt parsing solves this issue but mixing it with recursive descent - Read more [here (written in Java)](https://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/)
+    - Pratt parsing essentially associated a parsing function with a token type. If that token type is encountered, then the parsing function is
+    executed and returns an AST node to represent it.
+        - Each token type can have two parsing functions: for prefix or infix positions
+- The challenge of evaluating expressions is not to represent every single operator and operand but how we can correctly and meaningfully *nest* these values in the AST.
+    - Essentially, if we are working with something like `1 + 2 + 3`, we want this to be correctly represented in the AST as `((1 + 2) + 3)`
+    - The AST needs to have two *ast.InfixExpression nodes like this  
+
+    ![NodeTree2](/Learning-Go/monkey-v2/assets/astTreeforAddition.png)  
+    
+    - The flow of execution for the parser can be read in *chapter 2.7 - How Pratt Parsing Works* in the *Writing an Interpreter for Go* book.
+    - Higher precedence = deeper in the tree 
+
 
 ## General Go notes
 - Note: [Useful article](https://medium.com/@mathieu.durand/how-to-use-golang-interface-vs-java-1fc8b281c101) to the differences in Interfaces between Java and Golang
@@ -171,7 +180,7 @@ type Y interface {
 - Interfaces can be parameters to functions
 - In Golang, only methods or values starting with a capital letter can be exported. For example, in the `lexer.go` file
 `New()` and `NewToken()` are exportable methods while `isDigit()` and others are not.
-- Functions can also have multiple return values
+- Functions can also have multiple return values. Probably one of the best things about golang
 ```
 func A(x, y int) (string, string) {...}
 ```
