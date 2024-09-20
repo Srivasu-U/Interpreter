@@ -9,7 +9,6 @@
     - Interal object system
     - Evaluator
 
-
 ### Lexers
 - Changing the source code to a simpler form. 
 - Instead of native machine language or bytecode, we will be changing it this way:  
@@ -26,8 +25,8 @@ such as whitespace, tab, newline and so on.
 - This is basically the console that is present in Javascript or Python. 
 - The REPL Reads the input, Evaluates it, Prints the result/output and does it all over again, aka, Loop.
 
-
 ### General Golang notes
+- Valuable links: [Go By Example](https://gobyexample.com/), [Tour of Go](https://go.dev/tour/list) and [Effective Go](https://go.dev/doc/effective_go)
 - Single chars must be enclosed in *single quotes(')*, double quotes will only work for strings
 - `:=` is called the short assignment operator. It both declares and assigns a variable, and implicitly decides on the datatype as well
   - An example: `var i int =  5` can be shortened as `i := 5`, unless the declaration and assignment needs to be separate as shown  
