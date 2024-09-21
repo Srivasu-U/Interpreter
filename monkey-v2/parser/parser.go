@@ -100,6 +100,7 @@ func (p *Parser) parseIdentifier() ast.Expression {
 }
 
 func (p *Parser) parseExpression(precedence int) ast.Expression {
+	defer untrace(trace("parseExpression"))
 	prefix := p.prefixParseFns[p.curToken.Type]
 
 	if prefix == nil {
@@ -423,31 +424,6 @@ func (p *Parser) parseExpressionStatement() *ast.ExpressionStatement {
 	}
 
 	return stmt
-}
-
-func (p *Parser) parseExpression(precedence int) ast.Expression {
-	defer untrace(trace("parseExpression"))
-	prefix := p.prefixParseFns[p.curToken.Type]
-
-	if prefix == nil {
-		p.noPrefixParseFnError(p.curToken.Type)
-		return nil
-	}
-	leftExp := prefix()
-
-	for !p.peekTokenIs(token.SEMICOLON) && precedence < p.peekPrecedence() {
-		// if the next token is not a semicolon and the precedence of the next token is greater than current token
-		infix := p.infixParseFns[p.peekToken.Type]
-		if infix == nil {
-			return leftExp
-		}
-
-		p.nextToken()
-
-		leftExp = infix(leftExp)
-	}
-
-	return leftExp
 }
 
 func (p *Parser) noPrefixParseFnError(t token.TokenType) {
