@@ -37,7 +37,9 @@ out and have no meaning in our programming language. Or how things such as `{}` 
 - Our Monkey-v1 basically takes the tokens from the lexer as input to create an AST. 
 - It also analyzes the input to assert the expected structure. Which is why parsing is also called syntactic analysis.
 - As described below, while parser generators can be used to solve problems, and just plugged into this project, the goal is to understand how parsers work which is why we are writing our own.
-- In the Monkey language, everything other than let and return statements is an expressions. Essentially, expressions evaluated into some result while statements do not. So expression parsing such as operator precendence, function calls, is part of the challenge of writing a parser.
+- In the Monkey language, everything other than let and return statements is an expressions. 
+    - Essentially, expressions evaluated into some result while statements do not. So expression parsing such as operator precendence, function calls, is part of the challenge of writing a parser.
+    - Function and function calls are also expressions since they evaluate into a value
 
 
 ### Parser generators
@@ -58,6 +60,7 @@ that can be thrown in the field.
 - The idea is to get a minimal parser that works with Monkey, is extendible and a good starting point.
 - What does a parser that work correctly mean? Accurate production of an AST that conveys the right information. This is where design comes in. Refer this [link](https://stackoverflow.com/questions/16066454/parsing-which-method-choose) and the first answer to find how design can impact the parser used.
 - All of our parsing functions are going to follow this protocol: start with current token being the type of token you’re associated with and return with current token being the last token that’s part of your expression type. Never advance the tokens too far.
+- Parses are extremely prone to off-by-one errors which are hard to debug as well. In this project, if a single `p.nextToken()` is missed somewhere, that is an automatic off-by-one. Care must be taken to check into this if errors are found
 
 ## AST used in this project
 - The initial structure of the AST as put forth in [ast.go](/ast/ast.go) is as follows
@@ -155,37 +158,14 @@ function parseOperatorExpression() {
     - The AST needs to have two *ast.InfixExpression nodes like this  
 
     ![NodeTree2](/Learning-Go/monkey-v2/assets/astTreeforAddition.png)  
-    
+
     - The flow of execution for the parser can be read in *chapter 2.7 - How Pratt Parsing Works* in the *Writing an Interpreter for Go* book.
     - Higher precedence = deeper in the tree 
-
-
-## General Go notes
-- Note: [Useful article](https://medium.com/@mathieu.durand/how-to-use-golang-interface-vs-java-1fc8b281c101) to the differences in Interfaces between Java and Golang
-    - Another [article](https://gobyexample.com/interfaces) showing a clear example of the usage of interfaces at a basic level
-- Interfaces are the one thing in Golang from OOP. It does not have classes. Interfaces can be declared using 
-```
-type X interface {
-    methodX() return_type
-}
-```
-- Inheritance or implementation of interfaces can also work like this 
-```
-type Y interface {
-    X       // Here, Y implements methodX() from X as well. Y **must** provide its own implementation of methodX()
-    methodY() return_type
-}
-```
-- Interfaces can somehow be struct elements?, ie, structs implement interfaces. I am not sure how
-- Interfaces can be parameters to functions
-- In Golang, only methods or values starting with a capital letter can be exported. For example, in the `lexer.go` file
-`New()` and `NewToken()` are exportable methods while `isDigit()` and others are not.
-- Functions can also have multiple return values. Probably one of the best things about golang
-```
-func A(x, y int) (string, string) {...}
-```
-- Consts do not use datatypes or the short hand operator `:=`
-- Type convertion works like this: `datatype(value)`. Example: `float64(2)` converts int 2 into float64
-- We also have type checking/assertion like this: `ident.(type)`. Example: `value.(string)` checks if value contains a string expression
-- Interesting error message: `impossible type assertion: program.Statements[0].(*ast.Statement)
-	*ast.Statement does not implement ast.Statement (type *ast.Statement is pointer to interface, not interface)`. What does this mean?
+    - `registerPrefix()` and `registerInfix()` with the corresponding maps and function types are the greatest tools in the Pratt parser, allowing for easy extensibility.
+    - General structure for extensibility: 
+        - Define an AST node in `ast.go`
+        - Write tests to enforce behaviour
+        - Write parsing code
+            - Generally includes registering a newly written prefix or infix parsing expression
+            - Use pre-written helper methods to validate behavior
+        - Run the tests
