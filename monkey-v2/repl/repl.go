@@ -2,7 +2,7 @@ package repl
 
 import (
 	"Learning-Go/monkey-v2/lexer"
-	"Learning-Go/monkey-v2/token"
+	"Learning-Go/monkey-v2/parser"
 	"bufio"
 	"fmt"
 	"io"
@@ -22,9 +22,22 @@ func Start(in io.Reader, out io.Writer) {
 
 		line := scanner.Text()
 		l := lexer.New(line)
+		p := parser.New(l)
 
-		for tok := l.NextToken(); tok.Type != token.EOF; tok = l.NextToken() {
-			fmt.Printf("{Type: %v, Literal: %v}\n", tok.Type, tok.Literal)
+		program := p.ParseProgram()
+		if len(p.Errors()) != 0 {
+			printParseErrors(out, p.Errors())
+			continue
 		}
+
+		io.WriteString(out, program.String())
+		io.WriteString(out, "\n")
+	}
+}
+
+func printParseErrors(out io.Writer, errors []string) {
+	io.WriteString(out, " parser errors:\n")
+	for _, msg := range errors {
+		io.WriteString(out, "\t"+msg+"\n")
 	}
 }
