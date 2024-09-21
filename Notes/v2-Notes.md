@@ -155,9 +155,10 @@ function parseOperatorExpression() {
     - The AST needs to have two *ast.InfixExpression nodes like this  
 
     ![NodeTree2](/Learning-Go/monkey-v2/assets/astTreeforAddition.png)  
-    
+
     - The flow of execution for the parser can be read in *chapter 2.7 - How Pratt Parsing Works* in the *Writing an Interpreter for Go* book.
     - Higher precedence = deeper in the tree 
+    - `registerPrefix()` and `registerInfix()` with the corresponding maps and function types are the greatest tools in the Pratt parser, allowing for easy extensibility.
 
 
 ## General Go notes
