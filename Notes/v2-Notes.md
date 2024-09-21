@@ -39,7 +39,7 @@ out and have no meaning in our programming language. Or how things such as `{}` 
 - As described below, while parser generators can be used to solve problems, and just plugged into this project, the goal is to understand how parsers work which is why we are writing our own.
 - In the Monkey language, everything other than let and return statements is an expressions. 
     - Essentially, expressions evaluated into some result while statements do not. So expression parsing such as operator precendence, function calls, is part of the challenge of writing a parser.
-    - Function calls are also expressions since they evaluate into a value
+    - Function and function calls are also expressions since they evaluate into a value
 
 
 ### Parser generators
