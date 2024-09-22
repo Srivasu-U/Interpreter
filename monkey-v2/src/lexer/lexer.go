@@ -1,7 +1,7 @@
 package lexer
 
 import (
-	"Learning-Go/monkey-v2/token"
+	"Learning-Go/monkey-v2/src/token"
 )
 
 type Lexer struct {
