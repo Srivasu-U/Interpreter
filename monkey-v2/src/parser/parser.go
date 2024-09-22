@@ -1,9 +1,9 @@
 package parser
 
 import (
-	"Learning-Go/monkey-v2/ast"
-	"Learning-Go/monkey-v2/lexer"
-	"Learning-Go/monkey-v2/token"
+	"Learning-Go/monkey-v2/src/ast"
+	"Learning-Go/monkey-v2/src/lexer"
+	"Learning-Go/monkey-v2/src/token"
 	"fmt"
 	"strconv"
 )
