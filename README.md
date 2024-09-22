@@ -1,5 +1,5 @@
 ## The Monkey Interpreted Languages
--This repo consists of different incremental versions of the Monkey programming language, as implemented from *Writing an Interpreter in Go* by Thorsten Ball.
+- This repo consists of different incremental versions of the Monkey programming language, as implemented from *Writing an Interpreter in Go* by Thorsten Ball.
 - Each subdirectory has its own version of the source code for the interpreter
     - `monkey-v1` mainly focuses on the lexer/tokenizer.
     - `monkey-v2` deals with writing a correct parser and AST for the language.
