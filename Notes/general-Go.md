@@ -51,3 +51,8 @@ func A(x, y int) (string, string) {...}
 - Interesting error message: `impossible type assertion: program.Statements[0].(*ast.Statement)
 	*ast.Statement does not implement ast.Statement (type *ast.Statement is pointer to interface, not interface)`. What does this mean?
 - String formatting reference: [click here](https://gobyexample.com/string-formatting)
+- Enums are not a thing in Golang but we can use custom types and const as a way to enforce type safety as done in `token.go` and `object.go`
+- This is how to get the datatype of an identifier/variable
+```
+dataType := variableName.(type)
+```

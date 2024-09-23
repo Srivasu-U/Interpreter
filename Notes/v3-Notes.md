@@ -45,4 +45,31 @@ function eval(astNode) {
     }
 }
 ```
-- What is the return type for eval? - Dependent on the internal object system of the interpreter (?)
+- What is the return type for eval? - Dependent on the internal object system of the interpreter (?). 
+    - We need a system to represent the values generated when evaluating the AST. Done by using the `object.go` class. Essentially creating object wrappers around the base datatypes with helper methods.
+    - Consider this code 
+    ```
+    let a = 5
+    [...]
+    a + a
+    ```
+    - We bind the value `5` to `a` and the code continues to execute. But when encountering `a + a`, we need to fetch the `5` again. 
+    - In the AST, 5 is a `*ast.IntegerLiteral` but we need to keep track of this and continue to evaluate rest of the AST.
+        - Some languages use native types (booleans, integer etc) of the host language to represent values from the interpreted language, without a wrapper
+        - Some languages only use pointers
+        - Some use a mixture of the two
+        - These differences are because the host language can represent its values natively in one way and/or the interpreted language can have its own limitations. For example, the interpreted language may only have booleans and ints, but another interpreted language may need dicts, lists and arrays.
+        - Speed of execution and memory usage is another consideration as usual
+        - Garbage collection as well
+        - TODO: Read source code of Wren [click here](https://github.com/wren-lang/wren)
+
+
+### Evaluator
+- The file `object/object.go` is essentially creating wrapper objects around the datatypes supported by Monkey, aka, int, bool and null.
+    - So when an integer literal is encountered by the interpreter, it is converted into an `ast.IntegerLiteral` then during the evaluation phase, it is turned into `object.Integer`. This value is saved in the struct and a reference is passed around to this struct.
+    - To put it simply, the `eval` function takes in an `ast.Node` (basically all nodes are `ast.Node`) as an input and returns an `object.Object` as an output
+    ```
+    func Eval(node ast.Node) object.Object
+    ```
+- Self-evaluating expressions = literals, because they evaluate to their own values, such as integers or booleans
+    - In the language of Monkey, given as `*ast.IntegerLiteral`, `Eval` needs to return an `*object.Integer` with the same `Value` as `*ast.IntegerLiteral.Value`
