@@ -71,8 +71,16 @@ function eval(astNode) {
     ```
     func Eval(node ast.Node) object.Object
     ```
+
+#### Self-Evaluating Expressions    
 - Self-evaluating expressions = literals, because they evaluate to their own values, such as integers or booleans
     - In the language of Monkey, given as `*ast.IntegerLiteral`, `Eval` needs to return an `*object.Integer` with the same `Value` as `*ast.IntegerLiteral.Value`
         - Looking at `evaluator.go`, if we take an integer literal as an example, such as `5;`, then the `Eval()` method receives the AST, starting with `*ast.Program`. This is evaluated into `[]ast.Statement`
         - For each `ast.Statement`, `Eval()` is called recursively, encountering `*ast.ExpressionStatement` and then `*ast.IntegerLiteral` in case of `5;`
 - This is very similar to boolean literals as well, since they are also self-evaluating
+
+#### Prefix Expressions
+- As mentioned in `v2-Notes.md`, but this is not the case with the evaluator.
+> A lot of Monkey language constructs are treated as a prefix because it the easiest way to parse them and register methods specific to a type of construct.
+- Only one operator and one operand is evaluated as a prefix expression. 
+    - Prefix operations are ! and -

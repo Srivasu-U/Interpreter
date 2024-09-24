@@ -169,3 +169,4 @@ function parseOperatorExpression() {
             - Generally includes registering a newly written prefix or infix parsing expression
             - Use pre-written helper methods to validate behavior
         - Run the tests
+    - A lot of Monkey language constructs are treated as a prefix because it the easiest way to parse them and register methods specific to a type of construct.
