@@ -73,3 +73,5 @@ function eval(astNode) {
     ```
 - Self-evaluating expressions = literals, because they evaluate to their own values, such as integers or booleans
     - In the language of Monkey, given as `*ast.IntegerLiteral`, `Eval` needs to return an `*object.Integer` with the same `Value` as `*ast.IntegerLiteral.Value`
+- Looking at `evaluator.go`, if we take an integer literal as an example, such as `5;`, then the `Eval()` method receives the AST, starting with `ast.Program`. This is evaluated into `[]ast.Statement`
+    - For each `ast.Statement`, `Eval()` is called recursively, encountering `ast.ExpressionStatement` and then `ast.IntegerLiteral` in case of `5;`
