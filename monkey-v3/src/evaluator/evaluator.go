@@ -5,6 +5,11 @@ import (
 	"Learning-Go/monkey-v3/src/object"
 )
 
+var (
+	TRUE  = &object.Boolean{Value: true}
+	FALSE = &object.Boolean{Value: false}
+)
+
 func evalStatements(stmts []ast.Statement) object.Object {
 	var result object.Object
 
@@ -13,6 +18,14 @@ func evalStatements(stmts []ast.Statement) object.Object {
 	}
 
 	return result
+}
+
+func nativeBooltoBooleanObject(input bool) *object.Boolean {
+	if input {
+		return TRUE
+	}
+
+	return FALSE
 }
 
 func Eval(node ast.Node) object.Object {
@@ -26,6 +39,8 @@ func Eval(node ast.Node) object.Object {
 	// Expressions
 	case *ast.IntegerLiteral:
 		return &object.Integer{Value: node.Value}
+	case *ast.Boolean:
+		return nativeBooltoBooleanObject(node.Value)
 	}
 
 	return nil
