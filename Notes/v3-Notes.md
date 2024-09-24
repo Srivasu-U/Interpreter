@@ -84,3 +84,15 @@ function eval(astNode) {
 > A lot of Monkey language constructs are treated as a prefix because it the easiest way to parse them and register methods specific to a type of construct.
 - Only one operator and one operand is evaluated as a prefix expression. 
     - Prefix operations are ! and -
+
+#### Conditionals
+- In Monkey, the consequence block, or the if block, will be executed if the condition resolves to anything *"truthy"*, it doesn't actually need to be *true*. *Truthy* just means not false and not null. This is the design decision for this language. For example
+```
+let x = 10;
+if (x) {
+puts("everything okay!");  //this is executed because if (10) is "truthy", if not exactly true
+} else {
+puts("x is too high!");
+shutdownSystem();
+}
+```
