@@ -96,3 +96,6 @@ puts("x is too high!");
 shutdownSystem();
 }
 ```
+
+#### Return statements
+- The main thing for return statements is that whatever statements are after `return`, are never executed.
