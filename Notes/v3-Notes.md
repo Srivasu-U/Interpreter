@@ -99,3 +99,12 @@ shutdownSystem();
 
 #### Return statements
 - The main thing for return statements is that whatever statements are after `return`, are never executed.
+- Return values are wrapped in their own objects to be kept track of.
+
+#### Error handling
+- Mainly about internal error handling such as wrong operators, unsupported operations and other exceptions
+- Errors and return statements are extremely similarly handled because both need to stop the execution of the program as soon as they are encountered
+- Errors are also wrapped, like return values, in their own objects.
+- The error object used in this interpreter only gives an error message
+    - Ideally, in production, the error should be a message and a stack trace with line and column numbers
+    - This can be done if the lexer also provides line and column numbers but ours does not do that
