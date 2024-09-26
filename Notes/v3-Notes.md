@@ -108,3 +108,8 @@ shutdownSystem();
 - The error object used in this interpreter only gives an error message
     - Ideally, in production, the error should be a message and a stack trace with line and column numbers
     - This can be done if the lexer also provides line and column numbers but ours does not do that
+
+#### Bindings
+- We have an identifier and a value is must be bound to but how exactly do you create this binding?
+- This is done by using something called environments
+    - This is essentially a hashmap that associates strings with objects
