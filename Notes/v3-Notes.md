@@ -113,3 +113,24 @@ shutdownSystem();
 - We have an identifier and a value is must be bound to but how exactly do you create this binding?
 - This is done by using something called environments
     - This is essentially a hashmap that associates strings with objects
+- Functions have their own environments and function call logic must deal with this separate env
+- The function block must execute with params in its own separate env.
+    - The current env, aka the "class env" cannot be overridden either
+    - The way to solve this is to create a new `object.Environment` with a pointer to the environment it is extending
+    - This way, we have two separate `Get()` and `Set()` and we can add to what is necessary/relevant
+    - If a value to be `Get()` is not in the function env, then it can check in the class env, until there is no more extending envs and then we can return an error
+- ***Note to self: Bindings, function call and function body/literal are interesting parts that can help with more understanding.***
+- Functions extend the environment they are currently in, instead of the current environment extending to match a function to deal with 
+    - Closures (aka functions within functions). Nested functions have access to their own env and the enclosing env. Something like this is possible in Monkey already
+    ```
+    let newAdder = fn(x) {
+    fn(y) { x + y };
+    };
+    let addTwo = newAdder(2);
+    addTwo(2);
+    ```
+
+#### Garbage collection
+- Uses Go's own GC
+- Writing our own GC would require us to disable Go's GC and then take over the responsibilities of both Monkey memory evaluation and also Go's
+- The environments are also destroyed by the GC after they are done
