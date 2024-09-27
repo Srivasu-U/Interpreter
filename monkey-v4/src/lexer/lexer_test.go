@@ -24,6 +24,8 @@ func TestNextToken(t *testing.T) {
 	if;
 	else;
 	return;
+	"foobar"
+	"foo bar"
 	`
 
 	tests := []struct {
@@ -114,6 +116,8 @@ func TestNextToken(t *testing.T) {
 		{token.SEMICOLON, ";"},
 		{token.RETURN, "return"},
 		{token.SEMICOLON, ";"},
+		{token.STRING, "foobar"},
+		{token.STRING, "foo bar"},
 
 		{token.EOF, ""},
 	}
