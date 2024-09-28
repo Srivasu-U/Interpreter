@@ -4,6 +4,7 @@
     - `monkey-v1` mainly focuses on the lexer/tokenizer.
     - `monkey-v2` deals with writing a correct parser and AST for the language.
     - `monkey-v3` looks into the evaluation of the parsed AST.
+    - `monkey-v3` additionally supports strings, arrays, hash-maps and certain built-in functions.
     - `Notes` consists of general notes regarding Golang, as well as notes related to what I understood as I went through each version of Monkey
 
 ### Execution of code
