@@ -60,3 +60,4 @@ dataType := variableName.(type)
 ```
 func name(args ...<datatype>) {...}
 ```
+- The datatype `interface{}` can be used to send a value of any type. This can be used either in structs or even as params to methods

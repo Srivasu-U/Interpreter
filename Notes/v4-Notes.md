@@ -20,3 +20,7 @@
 - Just like function call expressions, we treat arrays/indexing of arrays like infix expressions instead of prefix
     - In function call, `(` is considered the operator, with function name being the left operand and params being the right operand
     - In indexing of array, `[` is considered the operator instead
+- With arrays, the challenge is to be able to evaluate the actual array items as well as the array index.
+    - For example, `[1, 2*2]` is about evaluating the second array item/array literal
+    - `[1, 2, 3, 4][4/4]` is about evaluating the index to get value `1` and retrive the array element at index `1`
+- When trying to retrieve a value with index out of bounds, Monkey returns a NULL instead of throwing an error.
