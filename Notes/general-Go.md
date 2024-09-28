@@ -61,3 +61,6 @@ dataType := variableName.(type)
 func name(args ...<datatype>) {...}
 ```
 - The datatype `interface{}` can be used to send a value of any type. This can be used either in structs or even as params to methods
+- Arrays in go have two values attached with them: `length` and `capacity`
+  - For example `make([]int, 0, 10)` returns an array (also called a `slice` in Golang), of size 0 but it's underlying *capacity* is 10, i.e, it can hold 10 values, but it is currently empty.
+    - Thus, the length of a slice is *always* less than or equal to its capacity. This helps with memory conservation.

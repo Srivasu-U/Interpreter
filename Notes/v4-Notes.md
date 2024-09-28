@@ -24,3 +24,12 @@
     - For example, `[1, 2*2]` is about evaluating the second array item/array literal
     - `[1, 2, 3, 4][4/4]` is about evaluating the index to get value `1` and retrive the array element at index `1`
 - When trying to retrieve a value with index out of bounds, Monkey returns a NULL instead of throwing an error.
+- Built-in functions that operate on arrays
+    - `len` - length (also works with strings)
+    - `first` - returns first element of an array
+    - `last` - return last element of array
+    - `rest` - returns a new array containing all the elements of the array *except the first one*
+        - The array is *newly allocated*, i.e., the original array is not modified.
+    - `push` - returns a new array after appending a new element to the end of the original array
+        - Once again, a *newly allocated* array is returned, and the original is unmodified
+- `push` and `rest` indicate that arrays in Monkey are *immutable*.
