@@ -33,3 +33,24 @@
     - `push` - returns a new array after appending a new element to the end of the original array
         - Once again, a *newly allocated* array is returned, and the original is unmodified
 - `push` and `rest` indicate that arrays in Monkey are *immutable*.
+- This is now possible in Monkey. The line `iter(rest(arr), push(accumulated, f(first(arr))));` executes inside out, just for future reference.
+```
+let map = fn(arr, f) {
+        let iter = fn(arr, accumulated) {
+                if (len(arr) == 0 ) {
+                        accumulated
+                } else {
+                iter(rest(arr), push(accumulated, f(first(arr))));
+                }
+        };
+        iter(arr, []);
+};
+let a = [1, 2, 3, 4];
+let double = fn(x) { x * 2 };
+map(a, double);
+```
+
+### Hash maps
+- Keys can be of any type in Monkey: string, int or bool. It can even be an expression that resolves into one of the keys.
+- This uses Go's `map` as the underlying data structure, naturally.
+    - But since we can have keys of any datatype, we will have to modify certain behaviours.
