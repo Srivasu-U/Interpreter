@@ -16,3 +16,7 @@
 
 ### Arrays
 - No restriction on the type of values to be held in an array. A single array can hold an int, a bool, a string and a function.
+- The index operator has to have the highest precedence of all the operators since the actual value has to be retrieved.
+- Just like function call expressions, we treat arrays/indexing of arrays like infix expressions instead of prefix
+    - In function call, `(` is considered the operator, with function name being the left operand and params being the right operand
+    - In indexing of array, `[` is considered the operator instead
