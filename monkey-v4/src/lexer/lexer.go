@@ -1,7 +1,7 @@
 package lexer
 
 import (
-	"Learning-Go/monkey-v4/src/token"
+	"Interpreter/monkey-v4/src/token"
 )
 
 type Lexer struct {
@@ -133,6 +133,10 @@ func (l *Lexer) NextToken() token.Token {
 	case '"':
 		tok.Type = token.STRING
 		tok.Literal = l.readString()
+	case '[':
+		tok = newToken(token.LBRACKET, l.ch)
+	case ']':
+		tok = newToken(token.RBRACKET, l.ch)
 	case 0:
 		tok.Literal = ""
 		tok.Type = token.EOF

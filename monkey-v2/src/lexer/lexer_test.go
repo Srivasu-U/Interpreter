@@ -1,7 +1,7 @@
 package lexer
 
 import (
-	"Learning-Go/monkey-v2/src/token"
+	"Interpreter/monkey-v2/src/token"
 	"testing"
 )
 

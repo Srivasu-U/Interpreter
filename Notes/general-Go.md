@@ -19,7 +19,7 @@
 ```
 - Test methods but always start with a capital letter T and follow the format `func TestXxx(t *testing.T) {...}`.  
 This must be done in a file called `something_test.go` where the method under test is `something.go`. Both must be in the same package.
-- Imports from other files must always start from the actual directory of the `go.mod`. For example, `import "Learning-Go/monkey-v1/token"` is the correct way,  
+- Imports from other files must always start from the actual directory of the `go.mod`. For example, `import "Interpreter/monkey-v1/token"` is the correct way,  
 not `import "monkey=v1/token"` unless the *monkey-v1* directory has a `go.mod`. 
 - **Pointers** are really useful when utilizing variable of large sizes. Often a good practice to always just pass references for structs,  for example, instead of an entire struct, a reference to the struct can be passed instead
 - Note: [Useful article](https://medium.com/@mathieu.durand/how-to-use-golang-interface-vs-java-1fc8b281c101) to the differences in Interfaces between Java and Golang

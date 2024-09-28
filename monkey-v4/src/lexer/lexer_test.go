@@ -1,7 +1,7 @@
 package lexer
 
 import (
-	"Learning-Go/monkey-v4/src/token"
+	"Interpreter/monkey-v4/src/token"
 	"testing"
 )
 
@@ -26,6 +26,7 @@ func TestNextToken(t *testing.T) {
 	return;
 	"foobar"
 	"foo bar"
+	[1, 3];
 	`
 
 	tests := []struct {
@@ -116,8 +117,16 @@ func TestNextToken(t *testing.T) {
 		{token.SEMICOLON, ";"},
 		{token.RETURN, "return"},
 		{token.SEMICOLON, ";"},
+
 		{token.STRING, "foobar"},
 		{token.STRING, "foo bar"},
+
+		{token.LBRACKET, "["},
+		{token.INT, "1"},
+		{token.COMMA, ","},
+		{token.INT, "3"},
+		{token.RBRACKET, "]"},
+		{token.SEMICOLON, ";"},
 
 		{token.EOF, ""},
 	}

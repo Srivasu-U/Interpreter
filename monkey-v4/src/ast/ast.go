@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"Learning-Go/monkey-v4/src/token"
+	"Interpreter/monkey-v4/src/token"
 	"bytes"
 	"strings"
 )
@@ -300,4 +300,7 @@ func (sl *StringLiteral) TokenLiteral() string {
 }
 func (sl *StringLiteral) String() string {
 	return sl.Token.Literal
+}
+
+type ArrayLiteral struct {
 }

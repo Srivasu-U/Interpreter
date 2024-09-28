@@ -71,7 +71,7 @@ that can be thrown in the field.
         - ***Question:* Must all the different types of statements be their own struct? Is this not tedious or is there a better way to do this, more efficient?**
         - From the book  
 
-        ![Node tree](/Learning-Go/Notes/assets/letStatementNodeTree.png)
+        ![Node tree](/Interpreter/Notes/assets/letStatementNodeTree.png)
 - Excellent parser pseudocode
 ```
 function parseProgram() {
@@ -157,7 +157,7 @@ function parseOperatorExpression() {
     - Essentially, if we are working with something like `1 + 2 + 3`, we want this to be correctly represented in the AST as `((1 + 2) + 3)`
     - The AST needs to have two *ast.InfixExpression nodes like this  
 
-    ![NodeTree2](/Learning-Go/Notes/assets/astTreeforAddition.png)  
+    ![NodeTree2](/Interpreter/Notes/assets/astTreeforAddition.png)  
 
     - The flow of execution for the parser can be read in *chapter 2.7 - How Pratt Parsing Works* in the *Writing an Interpreter for Go* book.
     - Higher precedence = deeper in the tree 

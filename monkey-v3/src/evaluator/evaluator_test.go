@@ -1,9 +1,9 @@
 package evaluator
 
 import (
-	"Learning-Go/monkey-v3/src/lexer"
-	"Learning-Go/monkey-v3/src/object"
-	"Learning-Go/monkey-v3/src/parser"
+	"Interpreter/monkey-v3/src/lexer"
+	"Interpreter/monkey-v3/src/object"
+	"Interpreter/monkey-v3/src/parser"
 	"testing"
 )
 

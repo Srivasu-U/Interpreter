@@ -1,8 +1,8 @@
 package evaluator
 
 import (
-	"Learning-Go/monkey-v4/src/ast"
-	"Learning-Go/monkey-v4/src/object"
+	"Interpreter/monkey-v4/src/ast"
+	"Interpreter/monkey-v4/src/object"
 	"fmt"
 )
 

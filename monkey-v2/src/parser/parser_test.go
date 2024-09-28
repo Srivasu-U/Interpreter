@@ -1,8 +1,8 @@
 package parser
 
 import (
-	"Learning-Go/monkey-v2/src/ast"
-	"Learning-Go/monkey-v2/src/lexer"
+	"Interpreter/monkey-v2/src/ast"
+	"Interpreter/monkey-v2/src/lexer"
 	"fmt"
 	"testing"
 )

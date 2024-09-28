@@ -1,7 +1,7 @@
 package evaluator
 
 import (
-	"Learning-Go/monkey-v4/src/object"
+	"Interpreter/monkey-v4/src/object"
 )
 
 var builtins = map[string]*object.Builtin{

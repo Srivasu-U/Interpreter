@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"Learning-Go/monkey-v3/src/token"
+	"Interpreter/monkey-v3/src/token"
 	"bytes"
 	"strings"
 )

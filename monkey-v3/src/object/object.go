@@ -1,7 +1,7 @@
 package object
 
 import (
-	"Learning-Go/monkey-v3/src/ast"
+	"Interpreter/monkey-v3/src/ast"
 	"bytes"
 	"fmt"
 	"strings"

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Learning-Go/monkey-v3/src/repl"
+	"Interpreter/monkey-v3/src/repl"
 	"fmt"
 	"os"
 	"os/user"
