@@ -56,3 +56,7 @@ func A(x, y int) (string, string) {...}
 ```
 dataType := variableName.(type)
 ```
+- Variable number of params can be set to functions with this format 
+```
+func name(args ...<datatype>) {...}
+```
