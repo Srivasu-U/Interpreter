@@ -2,6 +2,7 @@ package evaluator
 
 import (
 	"Interpreter/monkey-v4/src/object"
+	"fmt"
 )
 
 var builtins = map[string]*object.Builtin{
@@ -100,6 +101,16 @@ var builtins = map[string]*object.Builtin{
 			newElems[length] = args[1]
 
 			return &object.Array{Elements: newElems}
+		},
+	},
+
+	"puts": &object.Builtin{
+		Fn: func(args ...object.Object) object.Object {
+			for _, arg := range args {
+				fmt.Println(arg.Inspect())
+			}
+
+			return NULL
 		},
 	},
 }
