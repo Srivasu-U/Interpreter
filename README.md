@@ -21,4 +21,5 @@
 > go test ./parser
 > go test ./ast
 > go test ./evaluator
+> go test ./object
 ```
