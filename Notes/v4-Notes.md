@@ -56,3 +56,39 @@ map(a, double);
 - Keys can be of any type in Monkey: string, int or bool. It can even be an expression that resolves into one of the keys.
 - This uses Go's `map` as the underlying data structure, naturally.
     - But since we can have keys of any datatype, we will have to modify certain behaviours.
+- The retrieval of values from a hash map is an interesting problem
+    - If we define the `Hash` object in our system as shown below, retrieval is convoluted. 
+    ```
+    type Hash struct {
+        Pairs map[Object]Object
+    }
+    ```
+    - Trying to retrieve with the following code, while the first line evaluated to `*object.String` with `.Value` as "
+    name" mapped to `*object.String` with `.Value` as "Monkey".
+    ```
+    let hash = {"name": "Monkey"};
+    hash["name"]
+    ```
+    - But when trying to access the value with the second "name" evaluates to a new `*object.String` and the comparison between the first and the second is false because both of these are pointers to different memory locations
+        - While the individual `.Value`s can be compared, this increased the time from O(1) to O(n), which is not what we want with hashes
+        ```
+        name1 := &object.String{Value: "name"}
+        monkey := &object.String{Value: "Monkey"}
+        pairs := map[object.Object]object.Object{}
+        pairs[name1] = monkey
+        fmt.Printf("pairs[name1]=%+v\n", pairs[name1])
+        // => pairs[name1]=&{Value:Monkey}
+        name2 := &object.String{Value: "name"}
+        fmt.Printf("pairs[name2]=%+v\n", pairs[name2])
+        // => pairs[name2]=<nil>
+        fmt.Printf("(name1 == name2)=%t\n", name1 == name2)
+        // => (name1 == name2)=false
+        ```
+    - Hence we need a way to generate hashes for objects that are easy to compare between different pointers having the same value.
+    - This is solved by using a Hash object (struct) with just an integer value
+    ```
+    type Hash struct {
+        Type ObjectType
+        value uint64
+    }
+    ```
