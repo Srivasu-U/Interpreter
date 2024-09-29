@@ -18,8 +18,10 @@
 - No restriction on the type of values to be held in an array. A single array can hold an int, a bool, a string and a function.
 - The index operator has to have the highest precedence of all the operators since the actual value has to be retrieved.
 - Just like function call expressions, we treat arrays/indexing of arrays like infix expressions instead of prefix
-    - In function call, `(` is considered the operator, with function name being the left operand and params being the right operand
-    - In indexing of array, `[` is considered the operator instead
+    - In function call, `(` is considered the operator, with function name being the left operand and params being the right operand, i.e, this is an *infix* operation
+    - In *indexing of array*, `[` is considered the operator instead, and this is an *infix* operation
+        - In the parsing on an *array literal*, `[` is considered as the operator again, but this is a *prefix* operation
+    - In hashes, `{` is the operator and this is *prefix*
 - With arrays, the challenge is to be able to evaluate the actual array items as well as the array index.
     - For example, `[1, 2*2]` is about evaluating the second array item/array literal
     - `[1, 2, 3, 4][4/4]` is about evaluating the index to get value `1` and retrive the array element at index `1`
