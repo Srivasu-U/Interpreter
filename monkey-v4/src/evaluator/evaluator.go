@@ -216,13 +216,13 @@ func evalIndexExpression(left, index object.Object) object.Object {
 	case left.Type() == object.ARRAY_OBJ && index.Type() == object.INTEGER_OBJ:
 		return evalArrayIndexExpression(left, index)
 	case left.Type() == object.HASH_OBJ:
-		return evalHashIndexExpressoin(left, index)
+		return evalHashIndexExpression(left, index)
 	default:
 		return newError("index operator not supported: %s", left.Type())
 	}
 }
 
-func evalHashIndexExpressoin(hash, index object.Object) object.Object {
+func evalHashIndexExpression(hash, index object.Object) object.Object {
 	hashObject := hash.(*object.Hash)
 
 	key, ok := index.(object.Hashable)
