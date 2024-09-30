@@ -19,7 +19,8 @@
 - The index operator has to have the highest precedence of all the operators since the actual value has to be retrieved.
 - Just like function call expressions, we treat arrays/indexing of arrays like infix expressions instead of prefix
     - In function call, `(` is considered the operator, with function name being the left operand and params being the right operand, i.e, this is an *infix* operation
-    - In *indexing of array and hashes both*, `[` is considered the operator instead, and this is an *infix* operation. Both hashes and arrays hence use the same prefix parsing method in our code, and it is registered with the `[` operator
+    - In *indexing of array and hashes both*, `[` is considered the operator instead, and this is an *infix* operation. (The right operand is the expression that resolves to an index and the left operand can be an array/hash or an identifier that resolves to an array/hash)
+        - Both hashes and arrays hence use the same prefix parsing method in our code, and it is registered with the `[` operator
         - In the parsing on an *array literal*, `[` is considered as the operator again, but this is a *prefix* operation
     - In hashes, `{` is the operator and this is *prefix*
 - With arrays, the challenge is to be able to evaluate the actual array items as well as the array index.
